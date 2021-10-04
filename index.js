@@ -21,15 +21,34 @@ class CategoryParser {
 
     async getTable() {
 
-        const table = await getHTML();
+        var fs = require('fs');
+
+        fs.open('testFile.txt', 'w', (err) => {
+            if(err) throw err;
+            console.log('File created');
+        });
+
+        const table = await this.getHTML();
         const xpath = require('xpath');
         const dom = require('xmldom').DOMParser;
  
-        var xml = table;
-        var doc = new dom().parseFromString(xml);
-        var nodes = xpath.select("//title", doc);
-
-        return nodes[0].localName + ": " + nodes[0].firstChild.data;
+        var xml = table.data;
+        var doc = new dom().parseFromString(xml, 'text/xml');
+        var nodes = xpath.select("//table[@class='wrapped relative-table confluenceTable']/tbody/*[preceding-sibling::tr[1]]", doc);
+        //console.log(nodes[0].toString());
+        //console.log(nodes);
+        // let tds = xpath.select("//td", nodes[56]);
+        // console.log(tds[0].toString());
+        nodes.forEach(tr => {
+            var row = new dom().parseFromString(tr.toString(), 'text/xml');
+            let tds = xpath.select("//td", row);
+            console.log('elem123ent', tds[1].lastChild.lastChild.data);
+            fs.appendFile('testFile.txt', tds[1].lastChild.lastChild.data + '\n', (err) => {
+                if(err) throw err;
+                console.log('Data has been added!');
+            });
+        })
+        //return nodes[0].localName + ": " + nodes[0].firstChild.data;
 
     }
 
