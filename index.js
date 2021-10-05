@@ -40,10 +40,10 @@ class CategoryParser {
                     
                     let firstLevel = $(tr).find('td:first-child').text();
                     let secondLevel = $(tr).find('td:nth-child(2)').text();
-                    let threeLevel = $(tr).find('td:nth-child(3)').text();
+                    let thirdLevel = $(tr).find('td:nth-child(3)').text();
                     let precent = $(tr).find('td:last-child').text();
 
-                    data.push({firstLevel, secondLevel, threeLevel, precent});
+                    data.push({firstLevel, secondLevel, thirdLevel, precent});
                     
                 })
             })()
