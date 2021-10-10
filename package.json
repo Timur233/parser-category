@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index"
   },
@@ -10,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.22.0",
-    "cheerio": "^1.0.0-rc.10"
+    "cheerio": "^1.0.0-rc.10",
+    "node-fetch": "^3.0.0"
   }
 }
